@@ -255,7 +255,7 @@ int main() {
 						if(prev_size >0){
 							car_s = end_path_s;
 						}
-						bool too_close = False;
+						bool too_close = false;
 
 						for(int i = 0; i < sensor_fusion.size(); i++){
 							float d = sensor_fusion[i][6];
