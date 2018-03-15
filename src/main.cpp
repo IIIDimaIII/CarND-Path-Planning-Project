@@ -202,7 +202,7 @@ int main() {
   }
 
 	int lane = 1;
-	double ref_velocity = 49.5; //mph
+	double ref_velocity = 0; //mph
 
   h.onMessage([&map_waypoints_x,&map_waypoints_y,&map_waypoints_s,&map_waypoints_dx,&map_waypoints_dy, &ref_velocity,&lane](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
                      uWS::OpCode opCode) {
@@ -266,15 +266,17 @@ int main() {
 								double check_car_s = sensor_fusion[i][5];
 
 								check_car_s += ((double)prev_size*0.02*check_speed);
-								if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){
-									ref_velocity = 29.5;
+								if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){									
+									too_close = true;
 								}
-
 							}
 						}
-
-					
-
+						if(too_close && (ref_velocity>=0.224) ){
+							ref_velocity -= 0.224;
+						}
+						else if(ref_velocity < 49.5){
+							ref_velocity += 0.224;
+						}			
 
 						vector<double> ptsx;
 						vector<double> ptsy;
