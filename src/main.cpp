@@ -314,7 +314,7 @@ int main() {
 						double target_dist = sqrt(target_x * target_x + target_y * target_y);
 						double x_add_on = 0;
 
-						for(int i = 0; i < 50 - previous_path_x.size(), i++){
+						for(int i = 0; i < 50 - previous_path_x.size(); i++){
 							double N = (target_dist / (0.02 * ref_velocity/2.24));
 							double x_point = x_add_on + target_x/N;
 							double y_point = s(x_point);
