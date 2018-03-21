@@ -266,9 +266,9 @@ int main() {
 
 				double current_delta_s = abs(check_car_s - car_s);
 				double pred_delta_s = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
-				if (current_delta_s < 15) || (pred_delta_s < 15):
+				if ((current_delta_s < 15) or (pred_delta_s < 15)){
 					cout<< "caution!" << endl;
-				
+				}
 
 				if (d < (2+4*lane+2) && d > (2+4*lane-2)){
 					double vx = sensor_fusion[i][3];
