@@ -303,7 +303,9 @@ int main() {
 			}
 			if(too_close && (ref_velocity>=0.224) ){
 				//ref_velocity -= 0.224;
-				ref_velocity -= max((slow_front_speed - car_speed) / 50.;0);
+				if(car_speed - slow_front_speed > 0){
+					ref_velocity -= (car_speed - slow_front_speed) / 50.;0);
+				}
 				//cout << slow_front_speed - car_speed << endl;
 			}
 			else if(ref_velocity < 49.5){
