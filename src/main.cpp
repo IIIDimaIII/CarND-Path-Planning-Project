@@ -259,6 +259,17 @@ int main() {
 
 			for(int i = 0; i < sensor_fusion.size(); i++){
 				float d = sensor_fusion[i][6];
+				double vx = sensor_fusion[i][3];
+				double vy = sensor_fusion[i][4];
+				double check_speed = sqrt(vx*vx+vy*vy);
+				double check_car_s = sensor_fusion[i][5];
+
+				double current_delta_s = abs(check_car_s - car_s);
+				double pred_delta_s = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
+				if (current_delta_s < 15) or (pred_delta_s < 15):
+					cout<< "caution!" << endl;
+				
+
 				if (d < (2+4*lane+2) && d > (2+4*lane-2)){
 					double vx = sensor_fusion[i][3];
 					double vy = sensor_fusion[i][4];
@@ -268,8 +279,8 @@ int main() {
 					check_car_s += ((double)prev_size*0.02*check_speed);
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){									
 						too_close = true;
-						safe_to_change_left = true;
-						safe_to_change_right = true;
+						bool safe_to_change_left = true;
+						bool safe_to_change_right = true;
 						if((lane - 1 >= 0) && safe_to_change_left){
 							lane -= 1; 
 						}
@@ -277,8 +288,7 @@ int main() {
 							if(safe_to_change_right){
 								lane += 1; 
 							}
-						}
-						
+						}						
 					}
 				}
 			}
