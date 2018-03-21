@@ -270,12 +270,12 @@ int main() {
 
 				double current_delta_s = abs(check_car_s - car_s);
 				double pred_delta_s = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
-				if ((current_delta_s < 15) or (pred_delta_s < 15)){
-					if(d - car_d < -2.0) {
+				if ((current_delta_s < 5) or (pred_delta_s < 5)){
+					if((d - car_d) < -1.5) {
 						//cout<< "no lane change left!" << endl;
 						left_safe = false;
 					}
-					else if(d - car_d > 2.0) {
+					else if((d - car_d) > 1.5) {
 						//cout<< "no lane change right!" << endl;
 						right_safe = false;
 					}
