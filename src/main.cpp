@@ -297,7 +297,7 @@ int main() {
 						}
 						else if (right_safe){
 							lane += 1; 
-						}												
+						}											
 					}
 				}
 			}
