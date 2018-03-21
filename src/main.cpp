@@ -264,9 +264,9 @@ int main() {
 			previous_s.erase(previous_s.begin()); //keep only the last 4 records
 
 			
-			double ds0 = previous_s[3] - previous_s[2]
-			double ds_tminus1 = previous_s[2] - previous_s[1]
-			double ds_tminus2 = previous_s[1] - previous_s[0]
+			double ds0 = previous_s[3] - previous_s[2];
+			double ds_tminus1 = previous_s[2] - previous_s[1];
+			double ds_tminus2 = previous_s[1] - previous_s[0];
 
 			double v0 = ds0 / 0.02;
 			double v_tminus1 = ds_tminus1 / 0.02;
