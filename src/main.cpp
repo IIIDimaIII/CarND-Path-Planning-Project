@@ -267,7 +267,7 @@ int main() {
 				double vy = sensor_fusion[i][4];
 				double check_speed = sqrt(vx*vx+vy*vy);
 				double check_car_s = sensor_fusion[i][5];
-				vector<double> c = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
+				vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
 				cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
 				cout <<  test_conv[0] << test_conv[1]  << endl;
 				cout << "i: " << i << " abs(delta s): " << abs(check_car_s - car_s) << " delta d: " << (d - car_d) << endl;
