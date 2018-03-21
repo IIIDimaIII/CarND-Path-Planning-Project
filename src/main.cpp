@@ -294,10 +294,10 @@ int main() {
 						
 						too_close = true;
 						slow_front_speed = check_speed;
-						if((lane - 1 >= 0) && left_safe){
+						if((lane > 1) && left_safe){
 							lane -= 1; 
 						}
-						else if ((lane + 1 <= 2) && right_safe){
+						else if ((lane < 2) && right_safe){
 							lane += 1; 
 						}											
 					}
