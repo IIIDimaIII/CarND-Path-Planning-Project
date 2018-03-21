@@ -258,6 +258,7 @@ int main() {
 			bool too_close = false;
 			bool left_safe = true;
 			bool right_safe = true;
+			double slow_front_speed = 0;
 
 
 			for(int i = 0; i < sensor_fusion.size(); i++){
@@ -271,24 +272,26 @@ int main() {
 				double pred_delta_s = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
 				if ((current_delta_s < 5) or (pred_delta_s < 5)){
 					if(d - car_d < -2.0) {
-						cout<< "no lane change left!" << endl;
+						//cout<< "no lane change left!" << endl;
 						left_safe = false;
 					}
 					else if(d - car_d > 2.0) {
-						cout<< "no lane change right!" << endl;
+						//cout<< "no lane change right!" << endl;
 						right_safe = false;
 					}
 				}
 
 				if (d < (2+4*lane+2) && d > (2+4*lane-2)){
-					double vx = sensor_fusion[i][3];
-					double vy = sensor_fusion[i][4];
-					double check_speed = sqrt(vx*vx+vy*vy);
-					double check_car_s = sensor_fusion[i][5];
+					//double vx = sensor_fusion[i][3];
+					//double vy = sensor_fusion[i][4];
+					//double check_speed = sqrt(vx*vx+vy*vy);
+					//double check_car_s = sensor_fusion[i][5];
 
 					check_car_s += ((double)prev_size*0.02*check_speed);
-					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){									
-						too_close = true;						
+					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){
+						
+						too_close = true;
+						slow_front_speed = check_speed;
 						if((lane - 1 >= 0) && left_safe){
 							lane -= 1; 
 						}
@@ -300,6 +303,7 @@ int main() {
 			}
 			if(too_close && (ref_velocity>=0.224) ){
 				ref_velocity -= 0.224;
+				cout << slow_front_speed - car_speed << endl;
 			}
 			else if(ref_velocity < 49.5){
 				ref_velocity += 0.224;
