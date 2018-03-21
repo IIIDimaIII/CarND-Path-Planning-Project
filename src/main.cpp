@@ -175,7 +175,7 @@ int main() {
   vector<double> map_waypoints_dy;
   
   // placeholder to collect few last s values for tracking previous velocity, acceleration
-  vector<double> previous_s = {124.834,124.834,124.834,124.834}; //vehicle spawns at s = 124.834
+  vector<double> previous_s = {0,0,0,0};
 
   // Waypoint map to read from
   string map_file_ = "../data/highway_map.csv";
@@ -206,8 +206,9 @@ int main() {
 
 	int lane = 1;
 	double ref_velocity = 0; //mph
+	int message_counter = 0;
 
-  h.onMessage([&map_waypoints_x,&map_waypoints_y,&map_waypoints_s,&map_waypoints_dx,&map_waypoints_dy, &ref_velocity,&lane, &previous_s](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
+  h.onMessage([&map_waypoints_x,&map_waypoints_y,&map_waypoints_s,&map_waypoints_dx,&map_waypoints_dy, &ref_velocity,&lane, &previous_s, &message_counter](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
                      uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -260,6 +261,12 @@ int main() {
 			}
 			bool too_close = false;
 			
+			if(counter == 0){
+				for(int i = 0; i<previous_s.size()-1;i++){ // feel the array with s where the vehicle has spawned
+					previous_s.push_back(car_s);
+					previous_s.erase(previous_s.begin()); 
+				}			
+			}
 			previous_s.push_back(car_s);
 			previous_s.erase(previous_s.begin()); //keep only the last 4 records
 
@@ -396,6 +403,7 @@ int main() {
           	ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
           
         }
+		counter += 1;
       } else {
         // Manual driving
         std::string msg = "42[\"manual\",{}]";
