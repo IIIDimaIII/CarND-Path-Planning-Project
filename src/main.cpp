@@ -268,11 +268,15 @@ int main() {
 					check_car_s += ((double)prev_size*0.02*check_speed);
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){									
 						too_close = true;
-						if(lane - 1 >= 0){
-							lane = 0; 
+						safe_to_change_left = true;
+						safe_to_change_right = true;
+						if((lane - 1 >= 0) && safe_to_change_left){
+							lane -= 1; 
 						}
-						else {							
-							lane = 2; 
+						else {
+							if(safe_to_change_right){
+								lane += 1; 
+							}
 						}
 						
 					}
