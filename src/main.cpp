@@ -282,7 +282,7 @@ int main() {
 			//for(int i = 0; i< previous_s.size(); i++){
 			//	cout << previous_s[i] << endl;
 			//}
-			cout << "velocity: " << v0 << ", acceleration: " << a0 << endl;
+			cout << "s: " << previous_s[3] << "velocity: " << v0 << ", acceleration: " << a0 << endl;
 
 
 
