@@ -175,7 +175,9 @@ int main() {
   vector<double> map_waypoints_dy;
   
   // placeholder to collect few last s values for tracking previous velocity, acceleration
-  vector<double> previous_s = {0,0,0,0};
+  vector<double> previous_s = {0,0,0,0,0,
+  							   0,0,0,0,0,
+							   0,0,0,0,0};
 
   // Waypoint map to read from
   string map_file_ = "../data/highway_map.csv";
@@ -270,19 +272,21 @@ int main() {
 			previous_s.push_back(car_s);
 			previous_s.erase(previous_s.begin()); //keep only the last 4 records
 
-			
-			double ds0 = previous_s[3] - previous_s[2];
-			double ds_tminus1 = previous_s[2] - previous_s[1];
-			double ds_tminus2 = previous_s[1] - previous_s[0];
+			double s_tminus2 = (previous_s[0] + previous_s[1] + previous_s[2] + previous_s[3] + previous_s[4]) / 5.;
+			double s_tminus1 = (previous_s[5] + previous_s[6] + previous_s[7] + previous_s[8] + previous_s[9]) / 5.;
+			double s_t0 = (previous_s[10] + previous_s[11] + previous_s[12] + previous_s[13] + previous_s[14]) / 5.;
+			//
+			double ds0 = s_t0 - s_tminus1;
+			double ds_tminus1 = s_tminus1 - s_tminus2;			
 
-			double v0 = ds0 / 0.02;
-			double v_tminus1 = ds_tminus1 / 0.02;
-			double a0 = (v0 - v_tminus1) /  0.02;
+			double v0 = ds0 / (0.02 * 5);
+			double v_tminus1 = ds_tminus1 / (0.02 * 5);
+			double a0 = (v0 - v_tminus1) /  (0.02 * 5);
 			//print out
 			//for(int i = 0; i< previous_s.size(); i++){
 			//	cout << previous_s[i] << endl;
 			//}
-			cout << "s: " << previous_s[3] << "velocity: " << v0 << ", acceleration: " << a0 << endl;
+			cout << "s: " << s_t0 << "velocity: " << v0 << ", acceleration: " << a0 << endl;
 
 
 
