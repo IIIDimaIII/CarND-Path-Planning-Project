@@ -277,7 +277,7 @@ int main() {
 
 			double v0 = ds0 / 0.02;
 			double v_tminus1 = ds_tminus1 / 0.02;
-			double a0 = (v_tminus1 - v0) /  0.02;
+			double a0 = (v0 - v_tminus1) /  0.02;
 			//print out
 			//for(int i = 0; i< previous_s.size(); i++){
 			//	cout << previous_s[i] << endl;
