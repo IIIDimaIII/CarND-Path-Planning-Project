@@ -256,6 +256,9 @@ int main() {
 				car_s = end_path_s;
 			}
 			bool too_close = false;
+			bool left_safe = true;
+			bool right_safe = true;
+
 
 			for(int i = 0; i < sensor_fusion.size(); i++){
 				float d = sensor_fusion[i][6];
@@ -266,12 +269,14 @@ int main() {
 
 				double current_delta_s = abs(check_car_s - car_s);
 				double pred_delta_s = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
-				if ((current_delta_s < 15) or (pred_delta_s < 15)){
+				if ((current_delta_s < 5) or (pred_delta_s < 5)){
 					if(d - car_d < -2.0) {
-						cout<< "caution left!" << endl;
+						cout<< "no lane change left!" << endl;
+						left_safe = false;
 					}
 					else if(d - car_d > 2.0) {
-						cout<< "caution right!" << endl;
+						cout<< "no lane change right!" << endl;
+						right_safe = false;
 					}
 				}
 
@@ -283,17 +288,13 @@ int main() {
 
 					check_car_s += ((double)prev_size*0.02*check_speed);
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){									
-						too_close = true;
-						bool safe_to_change_left = true;
-						bool safe_to_change_right = true;
-						if((lane - 1 >= 0) && safe_to_change_left){
+						too_close = true;						
+						if((lane - 1 >= 0) && left_safe){
 							lane -= 1; 
 						}
-						else {
-							if(safe_to_change_right){
-								lane += 1; 
-							}
-						}						
+						else if (right_safe){
+							lane += 1; 
+						}												
 					}
 				}
 			}
