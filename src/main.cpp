@@ -269,6 +269,9 @@ int main() {
 				double check_car_s = sensor_fusion[i][5];
 				cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
 				cout << "i: " << i << " abs(delta s): " << abs(check_car_s - car_s) << " delta d: " << (d - car_d) << endl;
+				cout << "i: " << i << " x: " << sensor_fusion[i][1] << "y: " << sensor_fusion[i][2] << endl;
+				cout << "ego x: " <<  car_x << " ego y" << car_y << endl;
+          	
 
 				double current_delta_s = abs(check_car_s - car_s);
 				//double pred_delta_s1 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
