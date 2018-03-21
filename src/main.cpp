@@ -175,8 +175,7 @@ int main() {
   vector<double> map_waypoints_dy;
   
   // placeholder to collect few last s values for tracking previous velocity, acceleration
-  vector<double> previous_s = {0,0,0,0};
-  //previous_s << 0, 0, 0, 0;
+  vector<double> previous_s = {124.834,124.834,124.834,124.834}; //vehicle spawns at s = 124.834
 
   // Waypoint map to read from
   string map_file_ = "../data/highway_map.csv";
@@ -264,10 +263,19 @@ int main() {
 			previous_s.push_back(car_s);
 			previous_s.erase(previous_s.begin()); //keep only the last 4 records
 
+			
+			double ds0 = previous_s[3] - previous_s[2]
+			double ds_tminus1 = previous_s[2] - previous_s[1]
+			double ds_tminus2 = previous_s[1] - previous_s[0]
+
+			double v0 = ds0 / 0.02;
+			double v_tminus1 = ds_tminus1 / 0.02;
+			double a0 = (v_tminus1 - v0) /  0.02;
 			//print out
-			for(int i = 0; i< previous_s.size(); i++){
-				cout << previous_s[i] << endl;
-			}
+			//for(int i = 0; i< previous_s.size(); i++){
+			//	cout << previous_s[i] << endl;
+			//}
+			cout << "velocity: " << v0 << ", acceleration: " << a0 << endl;
 
 
 
