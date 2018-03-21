@@ -282,7 +282,7 @@ int main() {
 			for(int i = 0; i < n; i++){
 				s_tminus2 += previous_s[i];
 				s_tminus1 += previous_s[i+n];
-				s_t0 += previous_s[i+2n];
+				s_t0 += previous_s[i+2*n];
 			}  
 			s_tminus2 /= n;
 			s_tminus1 /= n;
