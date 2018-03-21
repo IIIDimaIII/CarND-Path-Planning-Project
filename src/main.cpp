@@ -261,7 +261,7 @@ int main() {
 			}
 			bool too_close = false;
 			
-			if(counter == 0){
+			if(message_counter == 0){
 				for(int i = 0; i<previous_s.size()-1;i++){ // feel the array with s where the vehicle has spawned
 					previous_s.push_back(car_s);
 					previous_s.erase(previous_s.begin()); 
@@ -403,7 +403,7 @@ int main() {
           	ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
           
         }
-		counter += 1;
+		message_counter += 1;
       } else {
         // Manual driving
         std::string msg = "42[\"manual\",{}]";
