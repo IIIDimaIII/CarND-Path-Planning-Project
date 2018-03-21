@@ -270,7 +270,7 @@ int main() {
 
 				double current_delta_s = abs(check_car_s - car_s);
 				double pred_delta_s = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
-				if ((current_delta_s < 5) or (pred_delta_s < 5)){
+				if ((current_delta_s < 10) or (pred_delta_s < 10)){
 					if(d - car_d < -2.0) {
 						//cout<< "no lane change left!" << endl;
 						left_safe = false;
@@ -295,15 +295,16 @@ int main() {
 						if((lane - 1 >= 0) && left_safe){
 							lane -= 1; 
 						}
-						else if (right_safe){
+						else if ((lane + 1 <= 2) && right_safe){
 							lane += 1; 
 						}											
 					}
 				}
 			}
 			if(too_close && (ref_velocity>=0.224) ){
-				ref_velocity -= 0.224;
-				cout << slow_front_speed - car_speed << endl;
+				//ref_velocity -= 0.224;
+				ref_velocity -= (slow_front_speed - car_speed) / 50.;
+				//cout << slow_front_speed - car_speed << endl;
 			}
 			else if(ref_velocity < 49.5){
 				ref_velocity += 0.224;
