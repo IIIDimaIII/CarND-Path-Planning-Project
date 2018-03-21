@@ -173,13 +173,6 @@ int main() {
   vector<double> map_waypoints_s;
   vector<double> map_waypoints_dx;
   vector<double> map_waypoints_dy;
-  
-  // placeholder to collect few last s values for tracking previous velocity, acceleration
-  vector<double> previous_s;
-  int mov_aver_n = 20; //number of records in a single moving average point
-  for(int i = 0; i < mov_aver_n * 3; i++){
-	  previous_s.push_back(0);
-  }
 
   // Waypoint map to read from
   string map_file_ = "../data/highway_map.csv";
@@ -210,9 +203,8 @@ int main() {
 
 	int lane = 1;
 	double ref_velocity = 0; //mph
-	int message_counter = 0;
 
-  h.onMessage([&map_waypoints_x,&map_waypoints_y,&map_waypoints_s,&map_waypoints_dx,&map_waypoints_dy, &ref_velocity,&lane, &previous_s, &message_counter](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
+  h.onMessage([&map_waypoints_x,&map_waypoints_y,&map_waypoints_s,&map_waypoints_dx,&map_waypoints_dy, &ref_velocity,&lane](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
                      uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -264,44 +256,6 @@ int main() {
 				car_s = end_path_s;
 			}
 			bool too_close = false;
-			
-			if(message_counter == 0){
-				for(int i = 0; i<previous_s.size()-1;i++){ // feel the array with s where the vehicle has spawned
-					previous_s.push_back(car_s);
-					previous_s.erase(previous_s.begin()); 
-				}			
-			}
-			previous_s.push_back(car_s);
-			previous_s.erase(previous_s.begin()); //keep only the last 4 records
-
-			double s_tminus2 = 0;
-			double s_tminus1 = 0;
-			double s_t0 = 0;
-			int n = previous_s.size()/3;
-
-			for(int i = 0; i < n; i++){
-				s_tminus2 += previous_s[i];
-				s_tminus1 += previous_s[i+n];
-				s_t0 += previous_s[i+2*n];
-			}  
-			s_tminus2 /= n;
-			s_tminus1 /= n;
-			s_t0 /= n;
-			
-			//
-			double ds0 = s_t0 - s_tminus1;
-			double ds_tminus1 = s_tminus1 - s_tminus2;			
-
-			double v0 = ds0 / (0.02 * n);
-			double v_tminus1 = ds_tminus1 / (0.02 * n);
-			double a0 = (v0 - v_tminus1) /  (0.02 * n);
-			//print out
-			//for(int i = 0; i< previous_s.size(); i++){
-			//	cout << previous_s[i] << endl;
-			//}
-			cout << "s: " << s_t0 << "velocity: " << v0 << ", acceleration: " << a0 << endl;
-
-
 
 			for(int i = 0; i < sensor_fusion.size(); i++){
 				float d = sensor_fusion[i][6];
@@ -315,7 +269,7 @@ int main() {
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){									
 						too_close = true;
 						if(lane >0){
-							lane = 0;
+							lane = 2; //0
 						}
 						
 					}
@@ -420,7 +374,6 @@ int main() {
           	ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
           
         }
-		message_counter += 1;
       } else {
         // Manual driving
         std::string msg = "42[\"manual\",{}]";
