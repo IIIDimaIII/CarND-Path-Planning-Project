@@ -292,9 +292,9 @@ int main() {
 			double ds0 = s_t0 - s_tminus1;
 			double ds_tminus1 = s_tminus1 - s_tminus2;			
 
-			double v0 = ds0 / (0.02 * 5);
-			double v_tminus1 = ds_tminus1 / (0.02 * 5);
-			double a0 = (v0 - v_tminus1) /  (0.02 * 5);
+			double v0 = ds0 / (0.02 * n);
+			double v_tminus1 = ds_tminus1 / (0.02 * n);
+			double a0 = (v0 - v_tminus1) /  (0.02 * n);
 			//print out
 			//for(int i = 0; i< previous_s.size(); i++){
 			//	cout << previous_s[i] << endl;
