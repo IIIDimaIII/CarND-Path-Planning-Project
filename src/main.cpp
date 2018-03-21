@@ -269,15 +269,16 @@ int main() {
 				double check_car_s = sensor_fusion[i][5];
 
 				double current_delta_s = abs(check_car_s - car_s);
-				double pred_delta_s1 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
-				double pred_delta_s2 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 2.); //in two sec
-				if ((current_delta_s < 5) or (pred_delta_s1 < 5) or (pred_delta_s2 < 5) ){
+				//double pred_delta_s1 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
+				//double pred_delta_s2 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 2.); //in two sec
+				//if ((current_delta_s < 5) or (pred_delta_s1 < 5) or (pred_delta_s2 < 5) ){
+				if ((current_delta_s < 5)){
 					if((d - car_d) < -1.5) {
-						//cout<< "no lane change left!" << endl;
+						cout<< "no lane change left!" << endl;
 						left_safe = false;
 					}
 					else if((d - car_d) > 1.5) {
-						//cout<< "no lane change right!" << endl;
+						cout<< "no lane change right!" << endl;
 						right_safe = false;
 					}
 				}
