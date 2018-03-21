@@ -175,8 +175,8 @@ int main() {
   vector<double> map_waypoints_dy;
   
   // placeholder to collect few last s values for tracking previous velocity, acceleration
-  vector<double> previous_s;
-  previous_s << 0, 0, 0, 0;
+  vector<double> previous_s = {0,0,0,0};
+  //previous_s << 0, 0, 0, 0;
 
   // Waypoint map to read from
   string map_file_ = "../data/highway_map.csv";
