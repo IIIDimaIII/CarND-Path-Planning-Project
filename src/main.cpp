@@ -267,7 +267,7 @@ int main() {
 				double vy = sensor_fusion[i][4];
 				double check_speed = sqrt(vx*vx+vy*vy);
 				double check_car_s = sensor_fusion[i][5];
-				int check_car_lane = d / 4;
+				int check_car_lane = check_car_d / 4;
 				double check_car_x = sensor_fusion[i][1];
 				double check_car_y = sensor_fusion[i][2];
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
