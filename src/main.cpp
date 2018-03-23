@@ -277,7 +277,7 @@ int main() {
 				//double angle_1 = atan2(vx,vy);
 				//double angle_2 = atan2(car_x - check_car_x, car_y - check_car_y);
 				double angle = rad2deg(acos(  vx*(car_x-check_car_x) + vy*(car_y-check_car_y) /
-								           (check_speed * (pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2)))) 
+								           (check_speed * (pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2)))); 
 
 
 				if(angle > 90.){
