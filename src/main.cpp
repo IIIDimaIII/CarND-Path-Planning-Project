@@ -294,7 +294,14 @@ int main() {
 					
 					cout << "time to front: " <<  time_front_safe << endl;
 					cout << "time to back: " <<  time_back_safe  << endl;
-					if(abs(check_car_distance_s)< 5.){
+					
+					if(abs(check_car_distance_s)< 10.){
+						left_safe = false;
+					}
+					if( (time_front_safe > 0) && (time_front_safe < 3.) ){
+						left_safe = false;
+					}
+					if( (time_back_safe > 0) && (time_back_safe < 3.) ){
 						left_safe = false;
 					}
 
