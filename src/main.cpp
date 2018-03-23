@@ -272,13 +272,17 @@ int main() {
 				double check_car_y = sensor_fusion[i][2];
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
+				double check_car_x_projected2ego = cos(deg2rad(car_yaw)) * 
+												   cos( atan2(check_car_x - car_x , check_car_y - car_y ) - deg2rad(car_yaw) ) * 
+												   check_car_distance ;
 
 				if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
 					
 					cout << "car lane: " <<  check_car_lane << endl;
 					cout << "distance to the car : " <<  check_car_distance << endl;
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "projected s" << (check_car_x - car_x) * cos(car_yaw) << endl;
+					cout << "projected s" << (check_car_x - car_x) * cos(deg2rad(car_yaw)) << endl;
+					cout << " x in ego coordinates:  " << check_car_x_projected2ego << endl;
 				}
 
 				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
