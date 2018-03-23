@@ -306,15 +306,7 @@ int main() {
 					}
 				}
 				// checking right lane
-				if((check_car_lane == lane + 1) && (abs(check_car_distance_s) <30)){
-					/*cout << "car id: " <<  sensor_fusion[i][0] << endl;
-					cout << "car lane: " <<  check_car_lane << endl;					
-					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "relative speed : " << relative_speed << endl;				
-					
-					cout << "time to front: " <<  time_front_safe << endl;
-					cout << "time to back: " <<  time_back_safe  << endl;*/
-					
+				if((check_car_lane == lane + 1) && (abs(check_car_distance_s) <30)){					
 					if(abs(check_car_distance_s)< 10.){
 						right_safe = false;
 					}
@@ -325,10 +317,7 @@ int main() {
 						right_safe = false;
 					}
 				}
-
-
-
-				// check right lane				
+		
 
 				/*if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
 					
@@ -374,13 +363,13 @@ int main() {
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){
 						
 						too_close = true;
-						/*slow_front_speed = check_speed;
+						
 						if((lane > 1) && left_safe){
 							lane -= 1; 
 						}
 						else if ((lane < 2) && right_safe){
 							lane += 1; 
-						}*/											
+						}											
 					}
 				}
 			}
