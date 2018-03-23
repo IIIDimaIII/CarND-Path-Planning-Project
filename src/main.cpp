@@ -257,8 +257,7 @@ int main() {
 			}
 			bool too_close = false;
 			bool left_safe = true;
-			bool right_safe = true;
-			//double slow_front_speed = 0;
+			bool right_safe = true;		
 
 
 			for(int i = 0; i < sensor_fusion.size(); i++){
@@ -287,13 +286,6 @@ int main() {
 				double time_back_safe = (check_car_distance_s - -10.) / relative_speed;
 				// checking left lane
 				if((check_car_lane == lane - 1) && (abs(check_car_distance_s) <30)){
-					/*cout << "car id: " <<  sensor_fusion[i][0] << endl;
-					cout << "car lane: " <<  check_car_lane << endl;					
-					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "relative speed : " << relative_speed << endl;				
-					
-					cout << "time to front: " <<  time_front_safe << endl;
-					cout << "time to back: " <<  time_back_safe  << endl;*/
 					
 					if(abs(check_car_distance_s)< 10.){
 						left_safe = false;
@@ -317,47 +309,8 @@ int main() {
 						right_safe = false;
 					}
 				}
-		
-
-				/*if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
-					
-					cout << "car id: " <<  sensor_fusion[i][0] << endl;
-					cout << "car lane: " <<  check_car_lane << endl;					
-					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "angle: " <<  rad2deg(angle) << endl;
-					cout << "time to front: " <<  time_to_safe_maneuver_front << endl;
-					cout << "time to back: " <<  time_to_safe_maneuver_back  << endl;
-					
-				}*/
-
-				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
-				//cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
-				//cout <<  test_conv[0] << test_conv[1]  << endl;
-				//cout << "i: " << i << " abs(delta s): " << abs(check_car_s - car_s) << " delta d: " << (d - car_d) << endl;
-				//cout << "i: " << i << " x: " << sensor_fusion[i][1] << "y: " << sensor_fusion[i][2] << endl;
-				//cout << "ego x: " <<  car_x << " ego y" << car_y << endl;
-				
-
-				//double current_delta_s = abs(check_car_s - car_s);
-				//double pred_delta_s1 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
-				//double pred_delta_s2 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 2.); //in two sec
-				//if ((current_delta_s < 5) or (pred_delta_s1 < 5) or (pred_delta_s2 < 5) ){
-				/*if ((current_delta_s < 5)){
-					if((d - car_d) < -1.5) {
-						cout<< "no lane change left!" << endl;
-						left_safe = false;
-					}
-					else if((d - car_d) > 1.5) {
-						cout<< "no lane change right!" << endl;
-						right_safe = false;
-					}
-				}*/
 
 				if (check_car_d < (2+4*lane+2) && check_car_d > (2+4*lane-2)){
-					//double vx = sensor_fusion[i][3];
-					//double vy = sensor_fusion[i][4];
-					//double check_speed = sqrt(vx*vx+vy*vy);
-					//double check_car_s = sensor_fusion[i][5];
 
 					check_car_s += ((double)prev_size*0.02*check_speed);
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){
@@ -373,17 +326,8 @@ int main() {
 					}
 				}
 			}
-			cout << "left lane availability: " << left_safe << endl;
-			cout << "right lane availability: " << right_safe << endl;
 			if(too_close && (ref_velocity>=0.224) ){
 				ref_velocity -= 0.224;
-				/*if((car_speed - slow_front_speed > 0) && (car_speed - slow_front_speed <0.224 )){
-					ref_velocity -= (car_speed - slow_front_speed) / 50.;
-				}
-				else{
-					ref_velocity -= 0.224;
-				}*/
-				//cout << slow_front_speed - car_speed << endl;
 			}
 			else if(ref_velocity < 49.5){
 				ref_velocity += 0.224;
