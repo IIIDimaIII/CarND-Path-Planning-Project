@@ -272,18 +272,19 @@ int main() {
 				double check_car_y = sensor_fusion[i][2];
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
-				double relative_speed = car_speed * 1.60934 * 10. / 36. - check_speed;
-				
+				double relative_speed = car_speed * 1.60934 * 10. / 36. - check_speed;				
 
 				
 				//checking if the car is in front or behind				
 				double angle = acos((vx*(car_x-check_car_x) + vy*(car_y-check_car_y)) /
 								           (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5))); 
-
+				
 
 				if(rad2deg(angle) < 90.){
 					check_car_distance_s *= -1;
 				}
+				double time_front_safe = (check_car_distance_s - 10.) / relative_speed;
+				double time_back_safe = (check_car_distance_s - -10.) / relative_speed;
 				// check left lane
 				if((check_car_lane == lane - 1) && (abs(check_car_distance_s) <30)){
 					cout << "car id: " <<  sensor_fusion[i][0] << endl;
@@ -292,8 +293,8 @@ int main() {
 					cout << "relative speed : " << relative_speed << endl;
 					
 					//cout << "angle: " <<  rad2deg(angle) << endl;
-					//cout << "time to front: " <<  time_to_safe_maneuver_front << endl;
-					//cout << "time to back: " <<  time_to_safe_maneuver_back  << endl;
+					cout << "time to front: " <<  time_front_safe << endl;
+					cout << "time to back: " <<  time_back_safe  << endl;
 
 				}
 
