@@ -268,7 +268,12 @@ int main() {
 				double check_speed = sqrt(vx*vx+vy*vy);
 				double check_car_s = sensor_fusion[i][5];
 				int check_car_lane = d / 4;
+				double check_car_x = sensor_fusion[i][1];
+				double check_car_y = sensor_fusion[i][2];
+				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
+
 				cout << "car lane: " <<  check_car_lane << endl;
+				cout << "distance to the car : " <<  check_car_distance << endl;
 
 
 				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
