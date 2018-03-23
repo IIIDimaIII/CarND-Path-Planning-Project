@@ -274,8 +274,6 @@ int main() {
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
 				double relative_speed = car_speed - check_speed;
 				
-				double time_to_safe_maneuver_front = 10. / (car_speed - check_speed);
-				double time_to_safe_maneuver_back = -10. / (car_speed - check_speed);
 
 				
 				//checking if the car is in front or behind				
