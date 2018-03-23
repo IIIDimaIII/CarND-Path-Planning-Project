@@ -280,7 +280,7 @@ int main() {
 								           (check_speed * (pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2))))); 
 
 
-				if(angle > 90.){
+				if(angle < 90.){
 					check_car_distance_s *= -1;
 				}
 
@@ -289,8 +289,9 @@ int main() {
 					
 					cout << "car id: " <<  sensor_fusion[i][0] << endl;
 					cout << "car lane: " <<  check_car_lane << endl;
-					cout << "distance to the car : " <<  check_car_distance << endl;
+					//cout << "distance to the car : " <<  check_car_distance << endl;
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
+					cout << "angle: " <<  angle << endl;
 					//cout << "projected s" << (check_car_x - car_x) * cos(deg2rad(car_yaw)) << endl;
 					//cout << " x in ego coordinates:  " << check_car_x_projected2ego << endl;
 				}
