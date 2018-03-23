@@ -272,7 +272,7 @@ int main() {
 				double check_car_y = sensor_fusion[i][2];
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
-				double relative_speed = car_speed - check_speed;
+				double relative_speed = car_speed * 1.60934 * 10. / 36. - check_speed;
 				
 
 				
