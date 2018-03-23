@@ -257,7 +257,7 @@ int main() {
 			}
 			bool too_close = false;
 			bool left_safe = true;
-			//bool right_safe = true;
+			bool right_safe = true;
 			//double slow_front_speed = 0;
 
 
@@ -285,15 +285,15 @@ int main() {
 				}
 				double time_front_safe = (check_car_distance_s - 10.) / relative_speed;
 				double time_back_safe = (check_car_distance_s - -10.) / relative_speed;
-				// check left lane
+				// checking left lane
 				if((check_car_lane == lane - 1) && (abs(check_car_distance_s) <30)){
-					cout << "car id: " <<  sensor_fusion[i][0] << endl;
+					/*cout << "car id: " <<  sensor_fusion[i][0] << endl;
 					cout << "car lane: " <<  check_car_lane << endl;					
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
 					cout << "relative speed : " << relative_speed << endl;				
 					
 					cout << "time to front: " <<  time_front_safe << endl;
-					cout << "time to back: " <<  time_back_safe  << endl;
+					cout << "time to back: " <<  time_back_safe  << endl;*/
 					
 					if(abs(check_car_distance_s)< 10.){
 						left_safe = false;
@@ -304,8 +304,29 @@ int main() {
 					if( (time_back_safe > 0) && (time_back_safe < 3.) ){
 						left_safe = false;
 					}
-
 				}
+				// checking right lane
+				if((check_car_lane == lane + 1) && (abs(check_car_distance_s) <30)){
+					/*cout << "car id: " <<  sensor_fusion[i][0] << endl;
+					cout << "car lane: " <<  check_car_lane << endl;					
+					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
+					cout << "relative speed : " << relative_speed << endl;				
+					
+					cout << "time to front: " <<  time_front_safe << endl;
+					cout << "time to back: " <<  time_back_safe  << endl;*/
+					
+					if(abs(check_car_distance_s)< 10.){
+						right_safe = false;
+					}
+					if( (time_front_safe > 0) && (time_front_safe < 3.) ){
+						right_safe = false;
+					}
+					if( (time_back_safe > 0) && (time_back_safe < 3.) ){
+						right_safe = false;
+					}
+				}
+
+
 
 				// check right lane				
 
@@ -364,6 +385,7 @@ int main() {
 				}
 			}
 			cout << "left lane availability: " << left_safe << endl;
+			cout << "right lane availability: " << right_safe << endl;
 			if(too_close && (ref_velocity>=0.224) ){
 				ref_velocity -= 0.224;
 				/*if((car_speed - slow_front_speed > 0) && (car_speed - slow_front_speed <0.224 )){
