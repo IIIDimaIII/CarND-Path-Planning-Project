@@ -285,7 +285,7 @@ int main() {
 				//double cosine = (vx*(car_x-check_car_x) + vy*(car_y-check_car_y) /
 				//				           (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5)))
 
-				double angle = rad2deg(acos(vx*(car_x-check_car_x) + vy*(car_y-check_car_y)) /
+				double angle = acos((vx*(car_x-check_car_x) + vy*(car_y-check_car_y)) /
 								           (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5))); 
 
 
