@@ -284,10 +284,22 @@ int main() {
 				if(rad2deg(angle) < 90.){
 					check_car_distance_s *= -1;
 				}
-				double time_to_safe_maneuver_front = (check_car_distance_s -  10.) / (car_speed - check_speed); //time to front safety margin
-				double time_to_safe_maneuver_back =  (check_car_distance_s - -10.) / (car_speed - check_speed); //time to back safety margin
+				// check left lane
+				if (check_car_lane == lane - 1) && (abs(check_car_distance_s) <30){
+					cout << "car id: " <<  sensor_fusion[i][0] << endl;
+					cout << "car lane: " <<  check_car_lane << endl;					
+					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
+					cout << "relative speed : " << relative_speed << endl;
+					
+					//cout << "angle: " <<  rad2deg(angle) << endl;
+					//cout << "time to front: " <<  time_to_safe_maneuver_front << endl;
+					//cout << "time to back: " <<  time_to_safe_maneuver_back  << endl;
 
-				if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
+				}
+
+				// check right lane				
+
+				/*if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
 					
 					cout << "car id: " <<  sensor_fusion[i][0] << endl;
 					cout << "car lane: " <<  check_car_lane << endl;					
@@ -296,7 +308,7 @@ int main() {
 					cout << "time to front: " <<  time_to_safe_maneuver_front << endl;
 					cout << "time to back: " <<  time_to_safe_maneuver_back  << endl;
 					
-				}
+				}*/
 
 				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
 				//cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
