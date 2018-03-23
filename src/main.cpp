@@ -256,9 +256,9 @@ int main() {
 				car_s = end_path_s;
 			}
 			bool too_close = false;
-			bool left_safe = true;
-			bool right_safe = true;
-			double slow_front_speed = 0;
+			//bool left_safe = true;
+			//bool right_safe = true;
+			//double slow_front_speed = 0;
 
 
 			for(int i = 0; i < sensor_fusion.size(); i++){
@@ -267,19 +267,19 @@ int main() {
 				double vy = sensor_fusion[i][4];
 				double check_speed = sqrt(vx*vx+vy*vy);
 				double check_car_s = sensor_fusion[i][5];
-				vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
-				cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
-				cout <<  test_conv[0] << test_conv[1]  << endl;
-				cout << "i: " << i << " abs(delta s): " << abs(check_car_s - car_s) << " delta d: " << (d - car_d) << endl;
-				cout << "i: " << i << " x: " << sensor_fusion[i][1] << "y: " << sensor_fusion[i][2] << endl;
-				cout << "ego x: " <<  car_x << " ego y" << car_y << endl;
+				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
+				//cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
+				//cout <<  test_conv[0] << test_conv[1]  << endl;
+				//cout << "i: " << i << " abs(delta s): " << abs(check_car_s - car_s) << " delta d: " << (d - car_d) << endl;
+				//cout << "i: " << i << " x: " << sensor_fusion[i][1] << "y: " << sensor_fusion[i][2] << endl;
+				//cout << "ego x: " <<  car_x << " ego y" << car_y << endl;
 				
 
-				double current_delta_s = abs(check_car_s - car_s);
+				//double current_delta_s = abs(check_car_s - car_s);
 				//double pred_delta_s1 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 1.); //in one sec
 				//double pred_delta_s2 = abs((check_car_s - car_s) + (check_speed  - car_speed) * 2.); //in two sec
 				//if ((current_delta_s < 5) or (pred_delta_s1 < 5) or (pred_delta_s2 < 5) ){
-				if ((current_delta_s < 5)){
+				/*if ((current_delta_s < 5)){
 					if((d - car_d) < -1.5) {
 						cout<< "no lane change left!" << endl;
 						left_safe = false;
@@ -288,7 +288,7 @@ int main() {
 						cout<< "no lane change right!" << endl;
 						right_safe = false;
 					}
-				}
+				}*/
 
 				if (d < (2+4*lane+2) && d > (2+4*lane-2)){
 					//double vx = sensor_fusion[i][3];
@@ -300,24 +300,24 @@ int main() {
 					if( (check_car_s > car_s) && ((check_car_s - car_s)<30) ){
 						
 						too_close = true;
-						slow_front_speed = check_speed;
+						/*slow_front_speed = check_speed;
 						if((lane > 1) && left_safe){
 							lane -= 1; 
 						}
 						else if ((lane < 2) && right_safe){
 							lane += 1; 
-						}											
+						}*/											
 					}
 				}
 			}
 			if(too_close && (ref_velocity>=0.224) ){
 				//ref_velocity -= 0.224;
-				if((car_speed - slow_front_speed > 0) && (car_speed - slow_front_speed <0.224 )){
+				/*if((car_speed - slow_front_speed > 0) && (car_speed - slow_front_speed <0.224 )){
 					ref_velocity -= (car_speed - slow_front_speed) / 50.;
 				}
 				else{
 					ref_velocity -= 0.224;
-				}
+				}*/
 				//cout << slow_front_speed - car_speed << endl;
 			}
 			else if(ref_velocity < 49.5){
