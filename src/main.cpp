@@ -274,14 +274,14 @@ int main() {
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
 				
 				//checking if the car is in front or behind				
-				cout <<'vx' << vx << endl;
-				cout <<'vy' << vy << endl;
-				cout <<'car_x' << car_x << endl;
-				cout <<'car_y' << car_y << endl;
-				cout <<'check_car_x' << check_car_x << endl;
-				cout <<'check_car_y' << check_car_y << endl;
-				cout <<'numerator' << vx*(car_x-check_car_x) + vy*(car_y-check_car_y) << endl;
-				cout <<'divisor' << (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5)) << endl;
+				cout <<"vx" << vx << endl;
+				cout <<"vy" << vy << endl;
+				cout <<"car_x" << car_x << endl;
+				cout <<"car_y" << car_y << endl;
+				cout <<"check_car_x" << check_car_x << endl;
+				cout <<"check_car_y" << check_car_y << endl;
+				cout <<"numerator" << vx*(car_x-check_car_x) + vy*(car_y-check_car_y) << endl;
+				cout <<"divisor" << (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5)) << endl;
 
 				double angle = rad2deg(acos(vx*(car_x-check_car_x) + vy*(car_y-check_car_y) /
 								           (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5)))); 
