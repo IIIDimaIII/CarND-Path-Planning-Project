@@ -285,7 +285,7 @@ int main() {
 					check_car_distance_s *= -1;
 				}
 				// check left lane
-				if (check_car_lane == lane - 1) && (abs(check_car_distance_s) <30){
+				if((check_car_lane == lane - 1) && (abs(check_car_distance_s) <30)){
 					cout << "car id: " <<  sensor_fusion[i][0] << endl;
 					cout << "car lane: " <<  check_car_lane << endl;					
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
