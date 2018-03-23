@@ -272,9 +272,14 @@ int main() {
 				double check_car_y = sensor_fusion[i][2];
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
-				double check_car_x_projected2ego = cos(deg2rad(car_yaw)) * 
-												   cos( atan2(check_car_x - car_x , check_car_y - car_y ) - deg2rad(car_yaw) ) * 
-												   check_car_distance ;
+				
+				//checking if the car is in front or behind
+				double angle_1 = atan2(vx,vy);
+				double angle_2 = atan2(car_x - check_car_x, car_y - check_car_y);
+				if(rad2deg(angle_1 - angle_2 d1) > 90.){
+					check_car_distance_s *= -1;
+				}
+
 
 				if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
 					
@@ -283,7 +288,7 @@ int main() {
 					cout << "distance to the car : " <<  check_car_distance << endl;
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
 					//cout << "projected s" << (check_car_x - car_x) * cos(deg2rad(car_yaw)) << endl;
-					cout << " x in ego coordinates:  " << check_car_x_projected2ego << endl;
+					//cout << " x in ego coordinates:  " << check_car_x_projected2ego << endl;
 				}
 
 				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
