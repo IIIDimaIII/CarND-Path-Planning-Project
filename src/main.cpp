@@ -256,7 +256,7 @@ int main() {
 				car_s = end_path_s;
 			}
 			bool too_close = false;
-			//bool left_safe = true;
+			bool left_safe = true;
 			//bool right_safe = true;
 			//double slow_front_speed = 0;
 
@@ -290,11 +290,13 @@ int main() {
 					cout << "car id: " <<  sensor_fusion[i][0] << endl;
 					cout << "car lane: " <<  check_car_lane << endl;					
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "relative speed : " << relative_speed << endl;
+					cout << "relative speed : " << relative_speed << endl;				
 					
-					//cout << "angle: " <<  rad2deg(angle) << endl;
 					cout << "time to front: " <<  time_front_safe << endl;
 					cout << "time to back: " <<  time_back_safe  << endl;
+					if(abs(check_car_distance_s)< 5.){
+						left_safe = false;
+					}
 
 				}
 
@@ -354,6 +356,7 @@ int main() {
 					}
 				}
 			}
+			cout << "left lane availability: " << left_safe << endl;
 			if(too_close && (ref_velocity>=0.224) ){
 				ref_velocity -= 0.224;
 				/*if((car_speed - slow_front_speed > 0) && (car_speed - slow_front_speed <0.224 )){
