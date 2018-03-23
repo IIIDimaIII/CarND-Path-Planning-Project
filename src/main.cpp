@@ -272,17 +272,13 @@ int main() {
 				double check_car_y = sensor_fusion[i][2];
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
+				double relative_speed = car_speed - check_speed;
+				
+				double time_to_safe_maneuver_front = 10. / (car_speed - check_speed);
+				double time_to_safe_maneuver_back = -10. / (car_speed - check_speed);
+
 				
 				//checking if the car is in front or behind				
-				/*cout <<"vx" << vx << endl;
-				cout <<"vy" << vy << endl;
-				cout <<"car_x" << car_x << endl;
-				cout <<"car_y" << car_y << endl;
-				cout <<"check_car_x" << check_car_x << endl;
-				cout <<"check_car_y" << check_car_y << endl;
-				cout <<"numerator" << vx*(car_x-check_car_x) + vy*(car_y-check_car_y) << endl;
-				cout <<"divisor" << (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5)) << endl;				
-				*/
 				double angle = acos((vx*(car_x-check_car_x) + vy*(car_y-check_car_y)) /
 								           (check_speed * pow(pow(car_x-check_car_x,2) + pow(car_y-check_car_y,2),0.5))); 
 
@@ -290,17 +286,18 @@ int main() {
 				if(rad2deg(angle) < 90.){
 					check_car_distance_s *= -1;
 				}
-
+				double time_to_safe_maneuver_front = (check_car_distance_s -  10.) / (car_speed - check_speed); //time to front safety margin
+				double time_to_safe_maneuver_back =  (check_car_distance_s - -10.) / (car_speed - check_speed); //time to back safety margin
 
 				if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
 					
 					cout << "car id: " <<  sensor_fusion[i][0] << endl;
-					cout << "car lane: " <<  check_car_lane << endl;
-					//cout << "distance to the car : " <<  check_car_distance << endl;
+					cout << "car lane: " <<  check_car_lane << endl;					
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "angle: " <<  angle << endl;
-					//cout << "projected s" << (check_car_x - car_x) * cos(deg2rad(car_yaw)) << endl;
-					//cout << " x in ego coordinates:  " << check_car_x_projected2ego << endl;
+					cout << "angle: " <<  rad2deg(angle) << endl;
+					cout << "time to front: " <<  time_to_safe_maneuver_front << endl;
+					cout << "time to back: " <<  time_to_safe_maneuver_back  << endl;
+					
 				}
 
 				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
