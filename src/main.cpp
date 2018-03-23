@@ -278,10 +278,11 @@ int main() {
 
 				if(((check_car_lane == lane - 1) or (check_car_lane == lane + 1)) && (check_car_distance_s <20)){
 					
+					cout << "car id: " <<  sensor_fusion[i][0] << endl;
 					cout << "car lane: " <<  check_car_lane << endl;
 					cout << "distance to the car : " <<  check_car_distance << endl;
 					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-					cout << "projected s" << (check_car_x - car_x) * cos(deg2rad(car_yaw)) << endl;
+					//cout << "projected s" << (check_car_x - car_x) * cos(deg2rad(car_yaw)) << endl;
 					cout << " x in ego coordinates:  " << check_car_x_projected2ego << endl;
 				}
 
