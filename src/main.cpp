@@ -276,7 +276,7 @@ int main() {
 				//checking if the car is in front or behind
 				double angle_1 = atan2(vx,vy);
 				double angle_2 = atan2(car_x - check_car_x, car_y - check_car_y);
-				if(rad2deg(angle_1 - angle_2 d1) > 90.){
+				if(rad2deg(angle_1 - angle_2) > 90.){
 					check_car_distance_s *= -1;
 				}
 
