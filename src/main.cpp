@@ -273,10 +273,11 @@ int main() {
 				double check_car_distance = pow(pow(check_car_x - car_x,2)+ pow(check_car_y - car_y,2), 0.5);
 				double check_car_distance_s = pow(pow(check_car_distance, 2)- pow(check_car_d - car_d,2), 0.5);
 
-				cout << "car lane: " <<  check_car_lane << endl;
-				cout << "distance to the car : " <<  check_car_distance << endl;
-				cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
-
+				if((check_car_lane!=1) && (check_car_distance_s <20)){
+					cout << "car lane: " <<  check_car_lane << endl;
+					cout << "distance to the car : " <<  check_car_distance << endl;
+					cout << "distance to the car  in s: " <<  check_car_distance_s << endl;
+				}
 
 				//vector<double> test_conv = getFrenet(sensor_fusion[i][1],sensor_fusion[i][2], car_yaw,map_waypoints_x,map_waypoints_y);
 				//cout << "i: " << i << " s: " << check_car_s << " d: " << d << " ego s: " << car_s << " ego d " << car_d << endl;
