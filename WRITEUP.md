@@ -14,5 +14,5 @@ The model continually checks the safety of the adjacent lanes. I used sensor fus
 1) within 10 meters in front or behind my car
 2) within 30 meters range which might enter 10-meter close zone within the next 3 seconds
 On the technical side, I had some issues with sensor fusion frenet data. The s values were not aligned with the ego car’s data, so I had to approximate other car s values for XY coordinates and speed vectors.
-###Conclusions
+### Conclusions
 In my experiments, the model demonstrated sound results that meet the requirements. However, I have noticed that there is at least one type of collisions that it cannot avoid – aggressive lane change by another car. In such rear cases, it would make sense to introduce extreme behavior, for example, emergency braking or evasive maneuver, which would violate max acceleration/jerk criteria but still should be a preferred plan of actions.
