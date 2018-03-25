@@ -1,4 +1,5 @@
-# The Goal of this Project
+# Path Planning Project
+## The Goal of this Project
 In this project, your goal is to design a path planner that can create smooth, safe paths for the car to follow along a 3 lane highway with traffic. A successful path planner should be able to keep inside its lane, avoid hitting other cars and pass slower moving traffic all by using localization, sensor fusion, and map data.
 ## My Approach
 ### Speed management. 
